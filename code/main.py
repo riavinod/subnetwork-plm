@@ -95,3 +95,5 @@ for task in ('NER', 'UD', 'UPOS'):
                     visualize_dense_sparsity(bert, path, block = False)
                     visualize_layer_attn_sparsity(bert, path, block = False)
                     print("Percentage of elements within 0.01 of 0 or 1: {:.5f}".format(bert.compute_binary_pct()))
+
+    break # breaking after task = NER

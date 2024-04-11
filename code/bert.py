@@ -94,10 +94,12 @@ class WordLevelBert(nn.Module):
             features, _, hidden, attention = self.bert(all_input_ids, attention_mask = all_input_mask)
         else:
             features, _ = self.bert(all_input_ids, attention_mask = all_input_mask)
+
+            features = self.bert(all_input_ids, attention_mask = all_input_mask).last_hidden_state
             hidden, attention = None, None
         del _
         # for each word, only keep last encoded token.
-        all_end_mask = all_end_mask.to(torch.uint8).unsqueeze(-1)
+        all_end_mask = all_end_mask.to(torch.uint8).unsqueeze(-1).bool()
         features_packed = features.masked_select(all_end_mask)
         # packed_len x dim
         features_packed = features_packed.reshape(-1, features.shape[-1])

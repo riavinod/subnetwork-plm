@@ -209,6 +209,7 @@ def train_ud(bert_encoder, train_path, dev_path, lambda_init = 1000, lambda_fina
     check_every = 2048
     lambda_reg = lambda_init
     for epoch in range(epochs):#tqdm.notebook.tqdm(range(epochs)):
+        print('Epoch: ', epoch, '/', epochs)
         np.random.shuffle(train_data)
         for i in range(0, len(train_data), batch_size):#tqdm.notebook.tqdm(range(0, len(train_data), batch_size)):
             examples = train_data[i:i+batch_size]
@@ -305,6 +306,8 @@ def train_ner(bert_encoder, train_path, dev_path, lambda_init = 1000, lambda_fin
         return accs_converged
 
     model = NERModel(bert_encoder)
+    train_path = '/users/rvinod/data/rvinod/repos/subnetwork-plm/data/CoLL-NER/eng.train'
+    dev_path = '/users/rvinod/data/rvinod/repos/subnetwork-plm/data/CoLL-NER/eng.testa'
     train_data = load_ner(train_path, model.tag2i)
     dev_data = load_ner(dev_path, model.tag2i)    
 
@@ -330,6 +333,7 @@ def train_ner(bert_encoder, train_path, dev_path, lambda_init = 1000, lambda_fin
     check_every = 2048
     lambda_reg = lambda_init
     for epoch in range(epochs):#tqdm.notebook.tqdm(range(epochs)):
+        print('Epoch: ', epoch, '/', epochs)
         np.random.shuffle(train_data)
         for i in range(0, len(train_data), batch_size):#tqdm.notebook.tqdm(range(0, len(train_data), batch_size)):
             examples = train_data[i:i+batch_size]
